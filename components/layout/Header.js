@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 import Link from "next/link";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
@@ -6,6 +6,8 @@ import { css } from "@emotion/react";
 import Buscar from '../ui/Buscar';
 import Navegacion from "./Navegacion";
 import Boton from "../ui/Boton";
+
+import { FirebaseContext } from '../../firebase';
 
 const ContenedorHeader = styled.div`
     max-width: 1200px;
@@ -23,12 +25,12 @@ const Logo = styled.p`
     line-height: 0;
     font-weight: 700;
     font-family: "Roboto Slab", serif;
-    margin-rightL 2rem;
+    margin-right: 2rem;
 `
 
 const Header = () => {
 
-    const usuario = false;
+    const { usuario, firebase } = useContext(FirebaseContext);
 
     return (  
         <header
@@ -66,21 +68,22 @@ const Header = () => {
                                     css={css`
                                         margin-right: 2rem
                                     `}
-                                >Hola Martin</p>
+                                >Hola {usuario.displayName}</p>
 
                                 <Boton 
                                     bgColor="true"
+                                    onClick={ () => firebase.cerrarSesion() }
                                 >Cerrar Sesión</Boton>
                             </Fragment>
                         ) :
                         (
                             <Fragment>
-                                <Link href="/">
+                                <Link href="/login">
                                     <Boton
                                         bgColor="true"
                                     >Login</Boton>
                                 </Link>
-                                <Link href="/">
+                                <Link href="/crear-cuenta">
                                     <Boton>Crear Cuenta</Boton>
                                 </Link>
                             </Fragment>
