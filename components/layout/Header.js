@@ -19,13 +19,14 @@ const ContenedorHeader = styled.div`
     }
 `
 
-const Logo = styled.p`
+const Logo = styled.a`
     color: var(--naranja);
     font-size: 4rem;
     line-height: 0;
     font-weight: 700;
     font-family: "Roboto Slab", serif;
     margin-right: 2rem;
+    cursor: pointer;
 `
 
 const Header = () => {
